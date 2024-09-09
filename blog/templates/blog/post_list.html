@@ -1,23 +1,13 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Blog do Coroinha</title>
-    </head>
-    <body>
-        <header>
-            <h1><a href="/">Página Principal</a></h1>
-        </header>
+{% extends 'blog/base.html' %}
 
-        <article>
-            <time>published: 14.06.2014, 12:14</time>
-            <h2><a href="">Eu não aguento mais o Ensino Médio.</a></h2>
-            <p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA.</p>
-        </article>
-
-        <article>
-            <time>published: 14.06.2014, 12:14</time>
-            <h2><a href="">Seria crime se eu cometesse um massacre no período da manhã da escola??</a></h2>
-            <p>Malditas crianças do Gonzaga, odeio todas elas.</p>
-        </article>
-    </body>
-</html>
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
